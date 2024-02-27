@@ -7,6 +7,11 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+/**
+ * La clase  BoardDrawing representa el panel que dibuja el tablero del juego.
+ * Se encarga de la representación visual de las celdas, jugadores y portales en el tablero.
+ */
+
 public class BoardDrawing extends JPanel {
 
     int row = 8;
@@ -16,13 +21,19 @@ public class BoardDrawing extends JPanel {
 
     BoardScreen bs;
 
+    /**
+     *
+     * @param row
+     * @param col
+     * @param bs
+     */
     public BoardDrawing(int row, int col, BoardScreen bs) {
         this.bs = bs;
 
         this.row = row;
         this.col = col;
 
-        cells = new ArrayList<Rectangle>();
+        cells = new ArrayList<>();
 
         cellnos = new int[row * col];
         for (int i = 0; i < row; i++) {
@@ -49,10 +60,13 @@ public class BoardDrawing extends JPanel {
         }
     }
 
-    BoardDrawing(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
+    /**
+     * El método paintComponent se utiliza para dibujar el tablero del juego y sus elementos.
+     *
+     * @param g El objeto {@code Graphics} utilizado para pintar.
+     */
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -161,6 +175,13 @@ public class BoardDrawing extends JPanel {
         }
     }
 
+    /**
+     * Asegura la posición del jugador en el tablero, actualizándola según los portales.
+     *
+     * @param pnos El número del jugador.
+     * @return Un mensaje que indica el resultado del movimiento del jugador a través de portales.
+     */
+    
     public String ensurePlayerPosition(int pnos) {
         String message = "";
         for (Portal port : bs.portals) {
@@ -176,6 +197,13 @@ public class BoardDrawing extends JPanel {
         return message;
     }
 
+     /**
+     * Establece la posición de un jugador en el tablero.
+     *
+     * @param a    La cantidad para incrementar la posición del jugador.
+     * @param pnos El número del jugador.
+     */
+    
     public void setPlayer(int a, int pnos) {
         bs.players.get(pnos).incPosition(a);
     }
