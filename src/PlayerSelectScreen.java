@@ -10,6 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 //needs massive aesthetic rewrites
+
+/**
+ *
+ * @author Santos
+ */
 public class PlayerSelectScreen extends JPanel {
 
     JButton go;
@@ -20,10 +25,16 @@ public class PlayerSelectScreen extends JPanel {
     JRadioButton opt2;
     JRadioButton opt3;
 
+    /**
+     *
+     */
     public void quitButtonActionListener() {
         mw.showCard("One");
     }
 
+    /**
+     *
+     */
     public void goButtonActionListener() {
         playerOptions();
         mw.s4.setUpPlayers();
@@ -32,6 +43,10 @@ public class PlayerSelectScreen extends JPanel {
 
     // Modificación de la variable playerOptions para mejorar la legibilidad 
     // del código, y hacerlo mas mantenible
+
+    /**
+     *
+     */
     public void playerOptions() {
         int selectedPlayers = getSelectedPlayers(); //Cambio de nombre para mejorar la legibilidad
         mw.s4.setMaxPlayers(selectedPlayers); //Cambio de nombre para mejorar la legibilidad
@@ -54,6 +69,10 @@ public class PlayerSelectScreen extends JPanel {
         return defaultPlayers;
     }
 
+    /**
+     *
+     * @param mw
+     */
     public PlayerSelectScreen(MainWindow mw) {
         this.mw = mw;
 

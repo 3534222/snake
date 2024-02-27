@@ -1,6 +1,6 @@
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,9 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ *
+ * @author Santos
+ */
 public class BoardScreen extends JPanel {
 
-    int player = 0;
     BoardDrawing bd;
     JPanel stats;
     JLabel dieResults;
@@ -31,25 +34,42 @@ public class BoardScreen extends JPanel {
 
     private Random random = new Random(); // Cambio 2: Crear un objeto Random como campo de clase.
 
+    /**
+     *
+     */
     public void quitButtonActionListener() {
         if (JOptionPane.showConfirmDialog(this, "Are you sure?") == JOptionPane.OK_OPTION) {
             System.exit(0);
         }
     }
 
+    /**
+     *
+     */
     public void goButtonActionListener() {
         mw.showCard("Two");
         mw.resetAll();
     }
 
+    /**
+     *
+     * @param m
+     */
     public void setMaxPlayers(int m) {
         maxPlayers = m;
     }
 
+    /**
+     *
+     * @return
+     */
     public int returnMaxPlayers() {
         return maxPlayers;
     }
 
+    /**
+     *
+     */
     public void setUpPlayers() {
         players = new ArrayList<>();
         for (int i = 0; i < returnMaxPlayers(); i++) {
@@ -67,6 +87,10 @@ public class BoardScreen extends JPanel {
         }
     }
 
+    /**
+     *
+     * @param mw
+     */
     public BoardScreen(MainWindow mw) {
         this.mw = mw;
 
@@ -116,26 +140,25 @@ public class BoardScreen extends JPanel {
         roll.addActionListener((ActionEvent e) -> {
             int rollResult = random.nextInt(6) + 1; // Cambio 2: Uso del objeto Random reutilizado.
             dieResults.setText("You rolled a " + rollResult);
-            player += rollResult;
             bd.setPlayer(rollResult, currPlayer);
             extraInfo.setText(bd.ensurePlayerPosition(currPlayer));
             bd.repaint();
-            
+
             players.get(currPlayer).incPlayerScore(1);
-            
+
             for (Player p : players) {
                 if (p.getPosition() >= boardX * boardY - 1) {
                     success.setText("And the winner is: " + p.getName() + "\nYour score: " + p.getPlayerScore());
                     roll.setVisible(false);
                 }
             }
-            
+
             if (currPlayer == maxPlayers - 1) {
                 currPlayer = 0;
             } else {
                 currPlayer += 1;
             }
-            
+
             whichPlayer.setText(players.get(currPlayer).getName());
         });
         roll.setVisible(true);
